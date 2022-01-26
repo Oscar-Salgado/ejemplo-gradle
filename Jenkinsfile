@@ -5,7 +5,7 @@ pipeline {
         stage('Build & Unit Test') {
             steps {
                 script {
-					//sh 'env'
+					bat './gradlew clean build'
                     println "Stage: ${env.STAGE_NAME}"                      
                 }
                 
@@ -14,7 +14,10 @@ pipeline {
         stage('Sonar') {
             steps {
                 script {
-                    println "Stage: ${env.STAGE_NAME}"                       
+					def scannerHome = tool 'sonar-scanner';
+					withSonarQubeEnv('sonarqube-server') { 
+					bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Sonarqube-jenkins -Dsonar.projectBaseDir=c:/repo/ejemplo-gradle/ -Dsonar.sources=src -Dsonar.java.binaries=build" 
+					}                    
                 }
                 
             }
@@ -22,15 +25,20 @@ pipeline {
         stage('Run') {
             steps {
                 script {
-                    println "Stage: ${env.STAGE_NAME}"                       
+                    //println "Stage: ${env.STAGE_NAME}"       
+					//bat 'nohup bash gradlew bootRun &'
+					bat "start /min gradlew spring-boot:run &"
+					println "probar manual en navegador: http://localhost:8081/rest/mscovid/test?msg=testing"
+					sleep 20
                 }
                 
             }
         }
-        stage('Test') {
+        stage('Testing Application') {
             steps {
                 script {
-                    println "Stage: ${env.STAGE_NAME}"                      
+                    println "Stage: ${env.STAGE_NAME}"   
+                    //bat "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing"
                 }
                 
             }
