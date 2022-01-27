@@ -2,5 +2,5 @@ projectKey=Sonarqube-jenkins
 serverUrl=http://localhost:9000
 serverVersion=9.2.4.50792
 dashboardUrl=http://localhost:9000/dashboard?id=Sonarqube-jenkins
-ceTaskId=AX6YYDxNSwTeLG0kfTIf
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AX6YYDxNSwTeLG0kfTIf
+ceTaskId=AX6YbnTDSwTeLG0kfTIh
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AX6YbnTDSwTeLG0kfTIh
